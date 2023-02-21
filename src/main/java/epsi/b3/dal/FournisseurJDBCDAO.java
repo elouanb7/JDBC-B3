@@ -57,13 +57,15 @@ public class FournisseurJDBCDAO implements FournisseurDAO {
               PreparedStatement ps = cnx.prepareStatement(UPDATE_QUERY)) {
             ps.setString(1, newFournisseur.getNom());
             ps.setString(2, Integer.toString(oldFournisseur.getId()));
+            ps.executeUpdate();
         }
     }
 
     public void deleteById(int fournisseurId) throws SQLException {
         try ( Connection cnx = DriverManager.getConnection( DB_URL, DB_USER, DB_PWD );
-              PreparedStatement ps = cnx.prepareStatement(DELETE_ID_QUERY)) {
+              PreparedStatement ps = cnx.prepareStatement(DELETE_ID_QUERY)){
             ps.setString(1, String.valueOf(fournisseurId));
+            ps.executeUpdate();
         }
     }
 }

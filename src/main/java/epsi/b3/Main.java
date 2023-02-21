@@ -1,10 +1,9 @@
 package epsi.b3;
 
 import epsi.b3.bo.Fournisseur;
-import epsi.b3.test.TestDelete;
-import epsi.b3.test.TestFindAll;
-import epsi.b3.test.TestInsertion;
-import epsi.b3.test.TestUpdate;
+import epsi.b3.dal.ArticleJDBCDAO;
+import epsi.b3.dal.FournisseurJDBCDAO;
+import epsi.b3.test.*;
 
 import java.sql.*;
 import java.util.List;
@@ -27,10 +26,10 @@ public class Main {
              Statement st = cnx.createStatement();) {
 
             TestInsertion test1 = new TestInsertion();
-            test1.Insert(new Fournisseur("La maison de la peinture"));
+            test1.Insert(new Fournisseur("La Maison de la Peinture"));
 
             TestUpdate test2= new TestUpdate();
-            test2.Update(new Fournisseur(1, "La maison de la peinture"), new Fournisseur("La cabane de la peinture"));
+            test2.Update(new Fournisseur(1, "La Maison de la Peinture"), new Fournisseur("La Cabane de la Peinture"));
 
             TestFindAll test3 = new TestFindAll();
             List<Fournisseur> listFournisseurs = test3.FindAll();
@@ -39,12 +38,13 @@ public class Main {
             TestDelete test4= new TestDelete();
             test4.Delete(1);
 
-
+            TestJdbcArticles test = new TestJdbcArticles(new FournisseurJDBCDAO(), new ArticleJDBCDAO());
+            test.insert();
 
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
 
-        System.out.println("Hello world! 👉");
+        System.out.println("Working !🙆‍♂️");
     }
 }
